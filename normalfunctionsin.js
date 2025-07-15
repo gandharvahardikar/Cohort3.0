@@ -1,3 +1,4 @@
+//lecture no 3, async js
 function sum (a,b)
 {
     return a + b;
