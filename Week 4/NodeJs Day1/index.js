@@ -1,3 +1,20 @@
-const chalk = require('chalk');
+const fs = require("fs");
 
-console.log(chalk.blue('hello world!'));
+function main(fileName)
+{
+    fs.readFile(fileName, "utf-8", function(err, data) 
+     {
+        let total = 0;
+        for (let i = 0; i < data.length; i++)
+        {
+           if (data[i] === " ")
+           {
+            total++;
+           }
+        }
+        console.log(total + 1);
+     }
+
+}
+
+main(process.argv);
