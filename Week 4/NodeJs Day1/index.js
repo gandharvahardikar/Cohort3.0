@@ -13,7 +13,7 @@ function main(fileName)
            }
         }
         console.log(total + 1);
-     }
+     })
 
 }
 
