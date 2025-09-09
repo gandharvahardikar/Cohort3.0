@@ -1,3 +1,4 @@
+const { Router } = require("express");
 const userRouter = Router();
 
 {
@@ -27,5 +28,5 @@ const userRouter = Router();
 }
 
 module.exports = {
-     UserRouter: UserRouter
+     userRouter: userRouter
 }
