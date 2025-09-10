@@ -1,4 +1,7 @@
 const express = require("express");
+const mongoose = require("mongoose");
+
+
 const { userRouter } = require("./routes/user");
 const { courseRouter } = require("./routes/course");
 const { adminRouter } = require("./routes/admin");
@@ -10,4 +13,12 @@ app.use("/api/vi/admin", adminRouter);
 app.use("/api/v1/course", courseRouter);
 
 
-app.listen(3000);
+async function main() {
+    // use dot env for credentials
+    await mongoose.connect("mongodb+srv://gandharvahardikar:mongo%40123@cluster0.8crovsj.mongodb.net/coursera-app")
+    app.listen(3000);
+    console.log("listening on port ");
+
+}
+
+main()
