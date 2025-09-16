@@ -1,32 +1,35 @@
-const { Router } = require("express");
-const userRouter = Router();
+const express = require('express');
+const { userModel } = require("../db");
+const userRouter = express.Router();
+const jwt = require("jsonwebtoken");
+const JWT_USER_PASSWORD = "hardikar123"
 
-{
-
-  // these are the endpoints here
-   userRouter.post("/user/signup", function(req, res) {
+userRouter.post("/signup", async function(req, res) {
+    const { email, password, firstname, lastname } = req.body; // <-- fixed typo
+    // TODO: hash the password so the plaintext password is not stored in the database
+    await userModel.create({
+        email: email,
+        password: password, // hash this in real code
+        firstname: firstname,
+        lastname: lastname,
+    });
     res.json({
         message: "signup endpoint"
-    })
+    });
+});
 
-    }) 
-
-    userRouter.post("/user/signin", function(req, res) {
+userRouter.post("/signin", function(req, res) {
     res.json({
-        message: "signup endpoint"
-    })
+        message: "signin endpoint"
+    });
+});
 
-    })
-
-
-    userRouter.get("/user/purchases", function(req, res) {
+userRouter.get("/purchases", function(req, res) {
     res.json({
-        message: "signup endpoint"
-    })
-
-    })
-}
+        message: "purchase endpoint"
+    });
+});
 
 module.exports = {
-     userRouter: userRouter
-}
+    userRouter
+};
