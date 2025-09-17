@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 console.log("database is connected");
 
 
-mongoose.connect("mongodb+srv://gandharvahardikar:mongo%40123@cluster0.8crovsj.mongodb.net/coursera-app")
+mongoose.connect("process.env.MONGO_URL")
 
 const {Schema} = require('mongoose');
 

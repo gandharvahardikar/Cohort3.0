@@ -3,6 +3,7 @@ const { userModel } = require("../db");
 const userRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const {JWT_USER_PASSWORD} = require("../config");
+const user = require('../middleware/user');
 
 userRouter.post("/signup", async function(req, res) {
     const { email, password, firstname, lastname } = req.body; // <-- fixed typo
@@ -18,10 +19,31 @@ userRouter.post("/signup", async function(req, res) {
     });
 });
 
-userRouter.post("/signin", function(req, res) {
-    res.json({
-        message: "signin endpoint"
+userRouter.post("/signin", async function(req, res) {
+    const { email, password } = req.body;
+
+    const user = await userModel.findOne({
+        email: email,
+        password: password
     });
+    
+    if(user) 
+    {
+        const token = jwt.sign({
+            id: user._id,
+            email: "harkirat@gmail.com"
+        }, JWT_USER_PASSWORD);
+    
+       res.json({
+        token: token
+       });
+   } 
+   else 
+    {
+        res.status(403).json({
+            message: "signin endpoint"
+        });
+    }
 });
 
 userRouter.get("/purchases", function(req, res) {
